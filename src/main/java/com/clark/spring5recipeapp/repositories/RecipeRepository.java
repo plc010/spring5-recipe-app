@@ -1,0 +1,7 @@
+package com.clark.spring5recipeapp.repositories;
+
+import com.clark.spring5recipeapp.domain.Recipe;
+import org.springframework.data.repository.CrudRepository;
+
+public interface RecipeRepository extends CrudRepository<Recipe, Long> {
+}
