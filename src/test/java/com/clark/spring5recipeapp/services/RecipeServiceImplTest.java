@@ -1,5 +1,6 @@
 package com.clark.spring5recipeapp.services;
 
+import com.clark.spring5recipeapp.commands.RecipeCommand;
 import com.clark.spring5recipeapp.converters.RecipeCommandToRecipe;
 import com.clark.spring5recipeapp.converters.RecipeToRecipeCommand;
 import com.clark.spring5recipeapp.domain.Recipe;
@@ -49,6 +50,38 @@ public class RecipeServiceImplTest {
         assertNotNull("Null recipe returned", recipeReturned);
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
+    }
+
+    @Test
+    public void getRecipeCommandByIdTest() {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        Optional<Recipe> optionalRecipe = Optional.of(recipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(optionalRecipe);
+
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(1L);
+
+        when(recipeToRecipeCommand.convert(any())).thenReturn(recipeCommand);
+
+        RecipeCommand commandById = recipeService.findCommandById(1L);
+
+        assertNotNull("Null recipe command returned", commandById);
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
+    }
+
+    @Test
+    public void deleteRecipeByIdTest() {
+        // given
+        Long idToDelete = 2L;
+
+        // when
+        recipeService.deleteById(idToDelete);
+
+        // then
+        verify(recipeRepository, times(1)).deleteById(anyLong());
     }
 
     @Test
