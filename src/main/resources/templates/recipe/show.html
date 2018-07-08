@@ -30,20 +30,34 @@
             <div class="col-md-6 offset-md-3">
                 <div class="card">
                     <div class="card-header">
-                        <h1 th:text="${recipe.description}">recipe description</h1>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h1 th:text="${recipe.description}">Recipe Description Here!</h1>
+                            </div>
+
+                            <div class="col-1">
+                                <a class="btn btn-default" href="#"
+                                   th:href="@{/recipe/{id}/image(id=${recipe.id})}" role="button">Change Image</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
                                 <h5>Categories:</h5>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-3">
                                 <ul>
                                     <li th:remove="all">cat one</li>
                                     <li th:remove="all">cat two</li>
                                     <li th:remove="all">cat three</li>
                                     <li th:each="category : ${recipe.categories}" th:text="${category.description}">category</li>
                                 </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <img src="../../static/images/guac-sample.jpg" width="200" height="200"
+                                    th:src="@{/recipe/{id}/recipeimage(id=${recipe.id})}"/>
+
                             </div>
                         </div>
                         <div class="row">

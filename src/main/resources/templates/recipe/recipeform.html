@@ -71,10 +71,13 @@
                                     </div>
                                     <div class="col-md-3 form-group">
                                         <label>Difficulty:</label>
-                                        <select class="form-control">
-                                            <option>Easy</option>
-                                            <option>Medium</option>
-                                            <option>Hard</option>
+                                        <select class="form-control" th:field="*{difficulty}">
+                                            <option th:remove="all" value="easy">Easy</option>
+                                            <option th:remove="all" value="medium">Medium</option>
+                                            <option th:remove="all" value="hard">Hard</option>
+                                            <option th:each="difficultyLevel : ${difficultyLevels}"
+                                                    th:value="${difficultyLevel}"
+                                                    th:text="${difficultyLevel}">val</option>
                                         </select>
                                     </div>
                                 </div>

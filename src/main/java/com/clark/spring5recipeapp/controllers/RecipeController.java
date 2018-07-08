@@ -1,6 +1,7 @@
 package com.clark.spring5recipeapp.controllers;
 
 import com.clark.spring5recipeapp.commands.RecipeCommand;
+import com.clark.spring5recipeapp.domain.Difficulty;
 import com.clark.spring5recipeapp.domain.Recipe;
 import com.clark.spring5recipeapp.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,11 @@ public class RecipeController {
     @ModelAttribute
     public Recipe getRecipe() {
         return new Recipe();
+    }
+
+    @ModelAttribute("difficultyLevels")
+    public Difficulty[] getDifficulty() {
+        return Difficulty.values();
     }
 
     @GetMapping("/recipe/{id}/show")
